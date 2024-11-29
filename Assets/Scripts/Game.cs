@@ -39,8 +39,6 @@ public class Game : MonoBehaviour
     #endregion Singleton
 
     public World _world;
-    
-
 
     public int width = 10;
     public int height = 7;
