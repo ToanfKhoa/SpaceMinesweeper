@@ -62,7 +62,6 @@ public class Game : MonoBehaviour
     
 
     public RectTransform bagIcon;
-    public RectTransform truebagIcon;
     public Camera mainCamera;
 
 
@@ -103,11 +102,6 @@ public class Game : MonoBehaviour
 
         if (mainCamera == null)
             mainCamera = Camera.main;
-
-        Vector2 viewportPosition = mainCamera.WorldToViewportPoint(truebagIcon.position);
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(viewportPosition.x * Screen.width, viewportPosition.y * Screen.height, mainCamera.nearClipPlane));
-
-        truebagIcon.position = worldPosition;
     }
 
     public void NewGame()
@@ -520,7 +514,7 @@ public class Game : MonoBehaviour
     {
     }
 
-    private IEnumerator MoveAndHandleObject(GameObject obj, Vector3 targetPosition)
+    private IEnumerator MoveAndHandleObject(GameObject obj)
     {
         float moveDuration = 1.0f;
         float elapsedTime = 0.0f;
@@ -559,7 +553,7 @@ public class Game : MonoBehaviour
     {
         Vector3 centerCellPosition = new Vector3(position.x + 0.5f, position.y + 0.5f, position.z);
         GameObject obj = Instantiate(prefab, centerCellPosition, Quaternion.identity);
-        StartCoroutine(MoveAndHandleObject(obj, truebagIcon.position));
+        StartCoroutine(MoveAndHandleObject(obj));
     }
 
     private void Sweep() 
