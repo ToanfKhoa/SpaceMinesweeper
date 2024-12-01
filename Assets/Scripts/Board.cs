@@ -62,12 +62,14 @@ public class Board : MonoBehaviour
             cell.type = Cell.Type.Block;
         }
 
-        //Tao hinh dang ngau nhien cho map
+        //Tao hinh dang ngau nhien cho map bang cach xoa bot tile
         int[] edgesx = { 0, width - 1 };
         foreach (int x in edgesx)             // Xử lý cột đầu và cuối
         {
             for (int y = 0; y < height; y++)
             {
+                if (y == 1 || y == 2 || y == height - 2 || x == height - 3) //Khong xoa vi tri o gan goc
+                { continue; }
                 Cell cell = grid[x, y];
                 if (Random.value > 0.5f) // Xác suất xóa thêm ngẫu nhiên
                 {
@@ -79,7 +81,7 @@ public class Board : MonoBehaviour
                         ClearTile(cell2);
 
                         Cell cell3 = grid[(x == 0) ? (x + 2) : (x - 2), y];
-                        if (!cell.block && Random.value > 0.7f)          //Xac suat xoa sau vao them nua
+                        if (!cell.block && Random.value > 0.8f)          //Xac suat xoa sau vao them nua
                         {                   
                             ClearTile(cell3);
                         }
@@ -92,6 +94,8 @@ public class Board : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
+                if(x == 1 || x == 2 || x == width - 2|| x == width - 3)  //Khong xoa vi tri o gan goc
+                { continue; }
                 Cell cell = grid[x, y];
                 if (Random.value > 0.5f) // Xác suất xóa thêm ngẫu nhiên
                 {
@@ -103,7 +107,7 @@ public class Board : MonoBehaviour
                         ClearTile(cell2);
 
                         Cell cell3 = grid[x, (y == 0) ? (y + 2) : (y - 2)];
-                        if (Random.value > 0.7f)          //Xac suat xoa sau vao them nua
+                        if (Random.value > 0.8f)          //Xac suat xoa sau vao them nua
                         {
                             ClearTile(cell3);
                         }

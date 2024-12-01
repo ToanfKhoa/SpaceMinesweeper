@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c29b53c304628d4ca796d46f2bf0370, type: 3}
   m_Name: Level 5
   m_EditorClassIdentifier: 
-  width: 17
-  height: 11
+  width: 18
+  height: 13
   mineCount: 22
   rockCount: 14
