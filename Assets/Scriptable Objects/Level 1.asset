@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 17
   height: 9
-  mineCount: 12
+  mineCount: 10
   rockCount: 0
