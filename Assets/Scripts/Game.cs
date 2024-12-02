@@ -83,7 +83,9 @@ public class Game : MonoBehaviour
 
     public GameObject Bagscreen;
     public GameObject OutOfHeartScreen;
-    
+
+    public GameObject bugPrefab;
+
     private void OnValidate()
     {
         mineCount = Mathf.Clamp(mineCount, 0, width * height);
@@ -507,11 +509,9 @@ public class Game : MonoBehaviour
             AudioManager.Instance.RareOreSound();
         }
 
+        if(Random.value > 0.98)        //ti le spawn bug
+            SpawnBug(cell);
         SaveData();
-    }
-
-    private void HandleObject(GameObject obj)
-    {
     }
 
     private IEnumerator MoveAndHandleObject(GameObject obj)
@@ -546,10 +546,10 @@ public class Game : MonoBehaviour
             yield return null;
         }
 
-        HandleObject(obj);
         Destroy(obj);
     }
-    private void InstantiateAndMove(GameObject prefab, Vector3 position)
+
+    public void InstantiateAndMove(GameObject prefab, Vector3 position)
     {
         Vector3 centerCellPosition = new Vector3(position.x + 0.5f, position.y + 0.5f, position.z);
         GameObject obj = Instantiate(prefab, centerCellPosition, Quaternion.identity);
@@ -612,6 +612,11 @@ public class Game : MonoBehaviour
     public void Backtomenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+    }
+
+    public void SpawnBug(Cell cell)
+    {
+        GameObject bug = Instantiate(bugPrefab, cell.position, Quaternion.identity);
     }
 }
         
