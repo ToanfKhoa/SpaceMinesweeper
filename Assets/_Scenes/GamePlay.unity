@@ -9241,6 +9241,7 @@ MonoBehaviour:
   UIDirtDigPrefab: {fileID: 8380620538283553660, guid: 19e36ed2d257ee74bae0c325e5f8d5b3, type: 3}
   Bagscreen: {fileID: 1272934114}
   OutOfHeartScreen: {fileID: 1227732646}
+  bugPrefab: {fileID: 2269101976617681043, guid: 247ff9107f579bd4cb5e477359c1d70b, type: 3}
 --- !u!1 &1704898998
 GameObject:
   m_ObjectHideFlags: 0
