@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class DiamondBug : MonoBehaviour
 {
-    public float speed = 0.1f;
+
+    public float speed = 0.08f;
+
     float randomDirection = 0;
     public void Update()
     {

@@ -47,10 +47,10 @@ public class Game : MonoBehaviour
     private float sumarea;
     private float totalarea;
 
-    private Board board;
-    private CellGrid grid;
+    public Board board;
+    public CellGrid grid;
     private bool gameover;
-    private bool generated;
+    public bool generated;
 
     public TextMeshProUGUI textgold;
     public TextMeshProUGUI textdiamond;
@@ -261,7 +261,7 @@ public class Game : MonoBehaviour
         
     }
 
-    private void Reveal(Cell cell)
+    public void Reveal(Cell cell)
     {
         
         if (cell.revealed) return;

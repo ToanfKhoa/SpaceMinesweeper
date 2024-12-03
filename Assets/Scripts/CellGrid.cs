@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CellGrid
 {
-    private readonly Cell[,] cells;
+    public readonly Cell[,] cells;
 
     public int Width => cells.GetLength(0);
     public int Height => cells.GetLength(1);
