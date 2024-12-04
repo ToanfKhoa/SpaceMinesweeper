@@ -66,9 +66,8 @@ public class Game : MonoBehaviour
 
 
     public GameObject sweepscreen;
-    private bool isImageVisible = false;
-    private int sweepmode = -1;
-    public GameObject radar;
+    public bool isImageVisible = false;
+    public int sweepmode = -1;
 
     public GameObject gameoverscreen;
     public GameObject gamewinscreen;
@@ -239,12 +238,6 @@ public class Game : MonoBehaviour
         textlevel.text = _userDatas.level.ToString();
     }
         
-    public void Setsweepmode()
-    {
-        AudioManager.Instance.SweeperSound();
-        sweepmode = -sweepmode;
-    }
-
     private void Reveal()
     {
         if (TryGetCellAtMousePosition(out Cell cell))
@@ -560,7 +553,6 @@ public class Game : MonoBehaviour
     {
         if (sweepmode == -1)
         {
-            radar.SetActive(false);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -576,7 +568,6 @@ public class Game : MonoBehaviour
         }
         else if (sweepmode == 1)
         {
-            radar.SetActive(true);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -593,11 +584,6 @@ public class Game : MonoBehaviour
         board.Draw(grid);
     }
 
-    public void SwitchSweepMode()
-    {
-        isImageVisible = !isImageVisible;
-        sweepscreen.SetActive(isImageVisible);
-    }
 
     public void SaveData()
     {
