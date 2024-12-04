@@ -20,13 +20,13 @@ public class Booster : MonoBehaviour
         {
             resultText.text = "Not enough diamond";
             resultText.gameObject.SetActive(true);
-            Invoke("removeResult", 2f);
+            Invoke("removeResult", 1f);
             return;
         }
 
-        resultText.text = "successful!";
+        resultText.text = "Laser On!";
         resultText.gameObject.SetActive(true);
-        Invoke("removeResult", 2f);
+        Invoke("removeResult", 1f);
 
         int width = Game.Instance.width;
         int height = Game.Instance.height;
