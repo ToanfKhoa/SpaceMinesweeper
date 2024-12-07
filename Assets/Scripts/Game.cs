@@ -62,8 +62,7 @@ public class Game : MonoBehaviour
     
 
     public RectTransform bagIcon;
-    public Camera mainCamera;
-
+    public Vector3 initCameraPosition;
 
     public GameObject sweepscreen;
     public bool isImageVisible = false;
@@ -101,8 +100,6 @@ public class Game : MonoBehaviour
 
         NewGame();
 
-        if (mainCamera == null)
-            mainCamera = Camera.main;
     }
 
     public void NewGame()
@@ -127,7 +124,8 @@ public class Game : MonoBehaviour
             }
         }
         Camera.main.transform.position = new Vector3(width / 2f, height / 2f, -10f);
-        
+        initCameraPosition = Camera.main.transform.position;
+
         gameover = false;
         generated = false;
         
