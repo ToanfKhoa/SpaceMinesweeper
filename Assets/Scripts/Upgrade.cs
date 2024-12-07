@@ -99,6 +99,7 @@ public class Upgrade : MonoBehaviour
             costgold = 500;
             costdiamond = 10;
             Game.Instance._userDatas.maxheart += 1;
+            Game.Instance._userDatas.heart += 1;
             heart2.interactable = true;
             heart1.interactable = false;
             Game.Instance._userDatas.skill3 = false;
@@ -109,6 +110,7 @@ public class Upgrade : MonoBehaviour
             costgold = 1000;
             costdiamond = 20;
             Game.Instance._userDatas.maxheart += 1;
+            Game.Instance._userDatas.heart += 1;
             heart2.interactable = false;
             Game.Instance._userDatas.skill4 = false;
         }

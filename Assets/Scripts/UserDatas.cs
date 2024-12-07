@@ -28,8 +28,8 @@ public class UserDatas
     public void Init()
     {
         level = 5;
-        gold = 0;
-        diamond = 1000;
+        gold = 9999;
+        diamond = 9999;
         maxheart = 3;
         heart = 3;
         timedig = 1.5f;
@@ -41,5 +41,5 @@ public class UserDatas
         skill4 = false;
         skill5 = true;
         skill6 = false;
-}
+    }
 }
