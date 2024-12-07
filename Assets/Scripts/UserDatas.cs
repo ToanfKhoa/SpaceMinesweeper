@@ -27,9 +27,9 @@ public class UserDatas
 
     public void Init()
     {
-        level = 1;
+        level = 5;
         gold = 0;
-        diamond = 0;
+        diamond = 1000;
         maxheart = 3;
         heart = 3;
         timedig = 1.5f;

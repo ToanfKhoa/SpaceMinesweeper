@@ -7,6 +7,7 @@ public class CameraPanAndZoom : MonoBehaviour
     Vector3 touchStart;
     public float zoomOutMin = 1;
     public float zoomOutMax;
+    public float moveMax = 7;
 
     void Start()
     {
@@ -54,6 +55,14 @@ public class CameraPanAndZoom : MonoBehaviour
         {
             Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Camera.main.transform.position += direction;
+
+            float distance = Vector3.Distance(Camera.main.transform.position, Game.Instance.initCameraPosition);
+            if (distance > moveMax)
+            {
+                //Dua camera ve vi tri hop le
+                Vector3 directionBack = (Camera.main.transform.position - Game.Instance.initCameraPosition).normalized;
+                Camera.main.transform.position = Game.Instance.initCameraPosition + directionBack * moveMax;
+            }
         }
     }    
     void zoom(float increment)

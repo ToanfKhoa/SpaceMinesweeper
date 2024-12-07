@@ -52,6 +52,12 @@ public class Booster : MonoBehaviour
             Game.Instance.generated = true;
         }
         GameObject laserEffect = Instantiate(laserPrefab, randomCell.position + new Vector3(0.5f, 0.5f), Quaternion.identity);
+
+        //Kiem tra neu hieu ung kich hoat ben ngoai camera thi dich chuyen toi do
+        Vector3 viewportPosition = Camera.main.WorldToViewportPoint(laserEffect.transform.position);
+        if(viewportPosition.x <= 0f || viewportPosition.x >= 1f || viewportPosition.y <= 0f || viewportPosition.y >= 0.9f)
+            Camera.main.transform.position = new Vector3(laserEffect.transform.position.x, laserEffect.transform.position.y, Camera.main.transform.position.z);
+
         Destroy(laserEffect, 0.5f);
         Game.Instance.Reveal(randomCell);
 
