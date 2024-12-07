@@ -20,7 +20,6 @@ public class Game : MonoBehaviour
         else
             _instance = this;
 
-        Application.targetFrameRate = 60;
         board = GetComponentInChildren<Board>();
 
         if (PlayerPrefs.HasKey(DATA_KEY))
