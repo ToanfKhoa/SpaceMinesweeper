@@ -43,8 +43,6 @@ public class Game : MonoBehaviour
     public int height = 7;
     public int mineCount = 10;
     public int rockCount = 4;
-    private float sumarea;
-    private float totalarea;
 
     public Board board;
     public CellGrid grid;
@@ -118,8 +116,6 @@ public class Game : MonoBehaviour
                 height = _world.levels[_userDatas.level].height;
                 mineCount = _world.levels[_userDatas.level].mineCount;
                 rockCount = _world.levels[_userDatas.level].rockCount;
-                sumarea = _world.levels[_userDatas.level].width * _world.levels[_userDatas.level].height - _world.levels[_userDatas.level].mineCount - _world.levels[_userDatas.level].rockCount;
-                totalarea = 0;
             }
         }
         Camera.main.transform.position = new Vector3(width / 2f, height / 2f, -10f);
@@ -404,6 +400,8 @@ public class Game : MonoBehaviour
 
     public void Lose()
     {
+        float totalarea = 0;
+        float sumarea = 0;
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -412,9 +410,13 @@ public class Game : MonoBehaviour
                 if (cell.revealed && cell.type != Cell.Type.Block &&  cell.type != Cell.Type.Mine)
                 {
                     totalarea++;
+                    sumarea++;                 
                 }
+                if (cell.revealed == false && cell.type != Cell.Type.Block && cell.type != Cell.Type.Mine)
+                    sumarea++;
             }
         }
+
         if ((totalarea / sumarea * 100) >= 100)
             textcomplete.text = (totalarea / (totalarea + 2) * 100).ToString("F2") + "%";
         else
