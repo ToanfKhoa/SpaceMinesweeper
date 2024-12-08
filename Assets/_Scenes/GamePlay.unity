@@ -7402,6 +7402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomOutMin: 1
   zoomOutMax: 3
+  moveMax: 7
 --- !u!1 &1317935276
 GameObject:
   m_ObjectHideFlags: 0
@@ -9547,7 +9548,7 @@ MonoBehaviour:
   goldPrefab: {fileID: 6127283333846756172, guid: c63566adec60af64aa7c9b258cdf8fbf, type: 3}
   diamondPrefab: {fileID: 6596698295473145215, guid: 1024f3a993e5edb43ae94e5d889a6c2c, type: 3}
   bagIcon: {fileID: 168666674}
-  mainCamera: {fileID: 1285800617}
+  initCameraPosition: {x: 0, y: 0, z: 0}
   sweepscreen: {fileID: 275739916}
   isImageVisible: 0
   sweepmode: -1
