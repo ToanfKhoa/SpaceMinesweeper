@@ -15,7 +15,6 @@ public class Cell
     public Type type;
     public int number;
     public bool revealed;
-    public bool chorded;
     public bool flagged;
     public bool exploded;
     public bool numempty;
