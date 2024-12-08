@@ -23,6 +23,7 @@ public class GameOver : MonoBehaviour
             if(Game.Instance._userDatas.diamond >= 1)
             {
                 Game.Instance.NewGame();
+                Game.Instance.OutOfHeartScreen.SetActive(false);
                 gameObject.SetActive(false);
                 Game.Instance._userDatas.diamond--;
                 Game.Instance._userDatas.heart++;
