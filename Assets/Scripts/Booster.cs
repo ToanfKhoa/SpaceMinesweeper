@@ -44,6 +44,8 @@ public class Booster : MonoBehaviour
                 }
             }
         }
+        if(listCanDigCell.Count == 0) return;
+
         Cell randomCell = listCanDigCell[Random.Range(0, listCanDigCell.Count)];
         if (!Game.Instance.generated)
         {
