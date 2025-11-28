@@ -2268,7 +2268,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1679670635}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: Backtomenu
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3077,7 +3077,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 56adb8a0c39828b428537f3a7a1cdf67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e4cce063a3861dc4da86e50b4554a4ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3120,7 +3120,7 @@ GameObject:
   - component: {fileID: 573986261}
   - component: {fileID: 573986260}
   m_Layer: 5
-  m_Name: Skill1 (2)
+  m_Name: dig2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3747,7 +3747,7 @@ GameObject:
   - component: {fileID: 629263130}
   - component: {fileID: 629263129}
   m_Layer: 5
-  m_Name: Skill1 (7)
+  m_Name: ore1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4149,7 +4149,7 @@ GameObject:
   - component: {fileID: 656579612}
   - component: {fileID: 656579611}
   m_Layer: 5
-  m_Name: Skill1 (1)
+  m_Name: dig1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4432,7 +4432,6 @@ GameObject:
   - component: {fileID: 744555664}
   - component: {fileID: 744555666}
   - component: {fileID: 744555665}
-  - component: {fileID: 744555667}
   m_Layer: 5
   m_Name: Information
   m_TagString: Untagged
@@ -4501,29 +4500,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744555663}
   m_CullTransparentMesh: 1
---- !u!114 &744555667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744555663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e25ee74c555a4147ad7000f31f84268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textGold: {fileID: 990177581}
-  textDiamond: {fileID: 1247511255}
-  textInfor: {fileID: 1458030366}
-  costGold: 0
-  costDiamond: 0
-  dig2: {fileID: 0}
-  heart2: {fileID: 0}
-  ore2: {fileID: 0}
-  dig1: {fileID: 0}
-  heart1: {fileID: 0}
-  ore1: {fileID: 0}
 --- !u!1 &747793572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,9 +4878,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e25ee74c555a4147ad7000f31f84268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textGold: {fileID: 0}
-  textDiamond: {fileID: 0}
-  textInfor: {fileID: 0}
+  textGold: {fileID: 990177581}
+  textDiamond: {fileID: 1247511255}
+  textInfor: {fileID: 1458030366}
   costGold: 0
   costDiamond: 0
   dig2: {fileID: 573986260}
@@ -4926,7 +4902,7 @@ GameObject:
   - component: {fileID: 849422908}
   - component: {fileID: 849422907}
   m_Layer: 5
-  m_Name: Skill1 (6)
+  m_Name: heart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7551,7 +7527,7 @@ GameObject:
   - component: {fileID: 1317935279}
   - component: {fileID: 1317935278}
   m_Layer: 5
-  m_Name: Text Complete
+  m_Name: 100% Complete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7839,7 +7815,7 @@ GameObject:
   - component: {fileID: 1360061111}
   - component: {fileID: 1360061110}
   m_Layer: 5
-  m_Name: Skill1 (8)
+  m_Name: ore2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8610,7 +8586,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1679670635}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: Backtomenu
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9293,14 +9269,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.17610055, g: 0.17610055, b: 0.17610055, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d68e2bf0d155e144db6875773d6d6c5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e4cce063a3861dc4da86e50b4554a4ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9814,7 +9790,7 @@ MonoBehaviour:
   textGold: {fileID: 340427724}
   textDiamond: {fileID: 301780120}
   textLevel: {fileID: 964861172}
-  textComplete: {fileID: 1317935278}
+  textComplete: {fileID: 2139690812}
   goldPrefab: {fileID: 6127283333846756172, guid: c63566adec60af64aa7c9b258cdf8fbf, type: 3}
   diamondPrefab: {fileID: 6596698295473145215, guid: 1024f3a993e5edb43ae94e5d889a6c2c, type: 3}
   bagIcon: {fileID: 168666674}
@@ -11371,7 +11347,7 @@ GameObject:
   - component: {fileID: 2024021250}
   - component: {fileID: 2024021249}
   m_Layer: 5
-  m_Name: Skill1 (5)
+  m_Name: heart2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11765,7 +11741,7 @@ GameObject:
   - component: {fileID: 2139690813}
   - component: {fileID: 2139690812}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text Complete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

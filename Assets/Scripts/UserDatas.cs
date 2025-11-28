@@ -35,11 +35,11 @@ public class UserDatas
         timeDig = 1.5f;
         probalityGold = 15;
         probalityDiamond = 4;
-        skill1 = false;
+        skill1 = true;
         skill2 = false;
-        skill3 = false;
+        skill3 = true;
         skill4 = false;
-        skill5 = false;
+        skill5 = true;
         skill6 = false;
     }
 }

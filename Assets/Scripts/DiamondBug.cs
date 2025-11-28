@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class DiamondBug : MonoBehaviour
@@ -13,7 +12,7 @@ public class DiamondBug : MonoBehaviour
     {
         if (randomDirection == 0)
             randomDirection = Random.Range(0, 2) == 0 ? -1 : 1;
-        this.transform.position += new Vector3(randomDirection * speed, 0);
+        this.transform.position += new Vector3(randomDirection * speed *Time.deltaTime, 0);
     }
 
     void OnMouseDown()
