@@ -12,7 +12,7 @@ public class Sweeper : MonoBehaviour
     {
         AudioManager.Instance.SweeperSound();
 
-        if (Game.Instance.sweepmode == -1)
+        if (Game.Instance.sweepMode == -1)
         {
             if (Game.Instance._userDatas.gold >= 1)
             {
@@ -31,9 +31,9 @@ public class Sweeper : MonoBehaviour
             Game.Instance.SaveData();
         }
 
-        Game.Instance.sweepmode = -Game.Instance.sweepmode;
+        Game.Instance.sweepMode = -Game.Instance.sweepMode;
         SwitchSweepMode();
-        if(Game.Instance.sweepmode == -1 ) 
+        if(Game.Instance.sweepMode == -1 ) 
             radar.SetActive(false);
         else
             radar.SetActive(true);
@@ -48,6 +48,6 @@ public class Sweeper : MonoBehaviour
     public void SwitchSweepMode()
     {
         Game.Instance.isImageVisible = !Game.Instance.isImageVisible;
-        Game.Instance.sweepscreen.SetActive(Game.Instance.isImageVisible);
+        Game.Instance.sweepScreen.SetActive(Game.Instance.isImageVisible);
     }
 }

@@ -14,9 +14,9 @@ public class Cell
     public Vector3Int position;
     public Type type;
     public int number;
-    public bool revealed;
-    public bool flagged;
-    public bool exploded;
-    public bool numempty;
-    public bool block;
+    public bool isRevealed;
+    public bool isFlagged;
+    public bool isExploded;
+    public bool isNumberEmpty;
+    public bool isBlock;
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System.Runtime.CompilerServices;
 
 
 public class Game : MonoBehaviour
@@ -46,13 +47,13 @@ public class Game : MonoBehaviour
 
     public Board board;
     public CellGrid grid;
-    private bool gameover;
-    public bool generated;
+    private bool gameOver;
+    public bool isGenerated;
 
-    public TextMeshProUGUI textgold;
-    public TextMeshProUGUI textdiamond;
-    public TextMeshProUGUI textlevel;
-    public TextMeshProUGUI textcomplete;
+    public TextMeshProUGUI textGold;
+    public TextMeshProUGUI textDiamond;
+    public TextMeshProUGUI textLevel;
+    public TextMeshProUGUI textComplete;
 
     public GameObject goldPrefab;
     public GameObject diamondPrefab;
@@ -61,12 +62,12 @@ public class Game : MonoBehaviour
     public RectTransform bagIcon;
     public Vector3 initCameraPosition;
 
-    public GameObject sweepscreen;
+    public GameObject sweepScreen;
     public bool isImageVisible = false;
-    public int sweepmode = -1;
+    public int sweepMode = -1;
 
-    public GameObject gameoverscreen;
-    public GameObject gamewinscreen;
+    public GameObject gameOverScreen;
+    public GameObject gameWinScreen;
 
     public UserDatas _userDatas;
     public const string DATA_KEY = "DATA_KEY";
@@ -74,12 +75,16 @@ public class Game : MonoBehaviour
     public GameObject UIDirtExplodePrefab;
     public GameObject UIMineExplodePrefab;
     public GameObject UIDirtDigPrefab;
-    private bool ishaveuidig = false;
+    private bool isHaveUiDig = false;
 
-    public GameObject Bagscreen;
-    public GameObject OutOfHeartScreen;
+    public GameObject bagScreen;
+    public GameObject outOfHeartScreen;
 
     public GameObject bugPrefab;
+
+    private const float HALF_CELL_WIDTH = 0.5f;
+    private const float HALF_CAMERA = 0.5f;
+    private const float CAMERA_Z = -10f;
 
     private void OnValidate()
     {
@@ -91,9 +96,9 @@ public class Game : MonoBehaviour
     {
         
 
-        this.textgold.text = _userDatas.gold.ToString();
-        this.textdiamond.text = _userDatas.diamond.ToString();
-        this.textlevel.text = _userDatas.level.ToString();
+        this.textGold.text = _userDatas.gold.ToString();
+        this.textDiamond.text = _userDatas.diamond.ToString();
+        this.textLevel.text = _userDatas.level.ToString();
 
         NewGame();
 
@@ -103,8 +108,8 @@ public class Game : MonoBehaviour
     {
         if (Game.Instance._userDatas.heart <= 0) 
         {
-            gameoverscreen.SetActive(true);
-            OutOfHeartScreen.SetActive(true);
+            gameOverScreen.SetActive(true);
+            outOfHeartScreen.SetActive(true);
         }          
             
         StopAllCoroutines();
@@ -118,11 +123,11 @@ public class Game : MonoBehaviour
                 rockCount = _world.levels[_userDatas.level].rockCount;
             }
         }
-        Camera.main.transform.position = new Vector3(width / 2f, height / 2f, -10f);
+        Camera.main.transform.position = new Vector3(width * HALF_CAMERA, height * HALF_CAMERA, CAMERA_Z);
         initCameraPosition = Camera.main.transform.position;
 
-        gameover = false;
-        generated = false;
+        gameOver = false;
+        isGenerated = false;
         
         holdTime = 0f;
 
@@ -155,19 +160,20 @@ public class Game : MonoBehaviour
     private void Update()
     {
         
-        if (!gameover)
+        if (!gameOver)
         {
             Sweep();
-            if(sweepmode == -1)
+            if(sweepMode == -1)
                 RevealAndFlag();
             
         }
         AdjustText();
     }
 
+    private const float UI_DIG_TIME = 0.3f;
     public void RevealAndFlag()
     {
-        if(EventSystem.current.currentSelectedGameObject == null && Bagscreen.activeSelf == false)
+        if(EventSystem.current.currentSelectedGameObject == null && bagScreen.activeSelf == false)
         {
             
             if (Input.GetMouseButtonDown(0))
@@ -175,28 +181,27 @@ public class Game : MonoBehaviour
                 isMouseButtonDown = true;
                 
                 //dig
-                
             }
 
-            
             if (TryGetCellAtMousePosition(out Cell cell) && isMouseButtonDown == true)
             {
-                if(ishaveuidig == false && cell.revealed == false)
+                if(isHaveUiDig == false && cell.isRevealed == false)
                 {
                     AudioManager.Instance.DigSound();
-                    Vector3 centerCellPositiona = new Vector3(cell.position.x + 0.5f, cell.position.y + 0.5f, cell.position.z);
+                    Vector3 centerCellPositiona = new Vector3(cell.position.x + HALF_CELL_WIDTH, 
+                                                            cell.position.y + HALF_CELL_WIDTH, 
+                                                            cell.position.z);
                     GameObject a = Instantiate(UIDirtDigPrefab, centerCellPositiona, Quaternion.identity);
-                    Destroy(a, 0.3f);
-                    Invoke("DestroyUIdig", 0.3f);
-                    ishaveuidig = true;
+                    Destroy(a, UI_DIG_TIME);
+                    Invoke("DestroyUIdig", UI_DIG_TIME);
+                    isHaveUiDig = true;
                 }               
             }
             
-
             if (Input.GetMouseButtonUp(0))
             {
 
-                if (holdTime < _userDatas.timedig)
+                if (holdTime < _userDatas.timeDig)
                 {
                     Flag();
                 }
@@ -204,13 +209,13 @@ public class Game : MonoBehaviour
                 isMouseButtonDown = false;
                 holdTime = 0f;
 
-                ishaveuidig = false;
+                isHaveUiDig = false;
             }
 
             if (isMouseButtonDown)
             {
                 holdTime += Time.deltaTime;
-                if (holdTime >= _userDatas.timedig)
+                if (holdTime >= _userDatas.timeDig)
                 {
                     Reveal();
                 }
@@ -220,29 +225,28 @@ public class Game : MonoBehaviour
     
     public void DestroyUIdig()
     {
-        ishaveuidig = false;
+        isHaveUiDig = false;
     }
         
     public void AdjustText() 
     {
-        textgold.text = _userDatas.gold.ToString();
-        textdiamond.text = _userDatas.diamond.ToString();
+        textGold.text = _userDatas.gold.ToString();
+        textDiamond.text = _userDatas.diamond.ToString();
         //textheart.text = heart.ToString();
-        textlevel.text = _userDatas.level.ToString();
+        textLevel.text = _userDatas.level.ToString();
     }
         
     private void Reveal()
     {
         if (TryGetCellAtMousePosition(out Cell cell))
         {
-            if (!generated)
+            if (!isGenerated)
             {
                 grid.GenerateMines(cell, mineCount);
                 grid.GenerateNumbers();
-                generated = true;
+                isGenerated = true;
             }
             Reveal(cell);
-            
         }
         
     }
@@ -250,9 +254,9 @@ public class Game : MonoBehaviour
     public void Reveal(Cell cell)
     {
         
-        if (cell.revealed) return;
-        if (cell.flagged) return;
-        Vector3 centerCellPositiona = new Vector3(cell.position.x + 0.5f, cell.position.y + 0.5f, cell.position.z);
+        if (cell.isRevealed) return;
+        if (cell.isFlagged) return;
+        Vector3 centerCellPositiona = new Vector3(cell.position.x + HALF_CELL_WIDTH, cell.position.y + HALF_CELL_WIDTH, cell.position.z);
         GameObject a = Instantiate(UIDirtExplodePrefab, centerCellPositiona, Quaternion.identity);
         Destroy(a, 1.5f);
 
@@ -272,7 +276,7 @@ public class Game : MonoBehaviour
                 break;
 
             default:
-                cell.revealed = true;
+                cell.isRevealed = true;
                 CollectOre(cell);
                 CheckWinCondition();
                 break;
@@ -281,17 +285,17 @@ public class Game : MonoBehaviour
         board.Draw(grid);
     }
 
-    
 
+    private const float FLOOD_DELAY_TIME = 0.3f;
     private IEnumerator Flood(Cell cell)
     {
-        if (gameover) yield break;
-        if (cell.revealed) yield break;
+        if (gameOver) yield break;
+        if (cell.isRevealed) yield break;
         if (cell.type == Cell.Type.Mine) yield break;
         if (cell.type == Cell.Type.Block) yield break;
 
-        cell.revealed = true;
-        Vector3 centerCellPosition = new Vector3(cell.position.x + 0.5f, cell.position.y + 0.5f, cell.position.z);
+        cell.isRevealed = true;
+        Vector3 centerCellPosition = new Vector3(cell.position.x + HALF_CELL_WIDTH, cell.position.y + HALF_CELL_WIDTH, cell.position.z);
         GameObject a = Instantiate(UIDirtExplodePrefab, centerCellPosition, Quaternion.identity);
         Destroy(a, 2f);
 
@@ -306,7 +310,7 @@ public class Game : MonoBehaviour
 
         if (cell.type == Cell.Type.Empty)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(FLOOD_DELAY_TIME);
             if (grid.TryGetCell(cell.position.x - 1, cell.position.y, out Cell left)) {
                 StartCoroutine(Flood(left));
             }
@@ -342,19 +346,19 @@ public class Game : MonoBehaviour
     private void Flag()
     {
         if (!TryGetCellAtMousePosition(out Cell cell)) return;
-        if (cell.revealed) return;
-        cell.flagged = !cell.flagged;
+        if (cell.isRevealed) return;
+        cell.isFlagged = !cell.isFlagged;
         board.Draw(grid);
     }
 
     private void Explode(Cell cell)
     {
         Debug.Log("Game Over!");
-        gameover = true;
+        gameOver = true;
 
         // Set the mine as exploded
-        cell.exploded = true;
-        cell.revealed = true;
+        cell.isExploded = true;
+        cell.isRevealed = true;
 
        
 
@@ -366,7 +370,7 @@ public class Game : MonoBehaviour
                 cell = grid[x, y];
 
                 if (cell.type == Cell.Type.Mine) {
-                    cell.revealed = true;
+                    cell.isRevealed = true;
                 }
 
             }
@@ -385,9 +389,11 @@ public class Game : MonoBehaviour
                 Cell cell = grid[x, y];
 
                 if (cell.type == Cell.Type.Mine) {
-                    cell.revealed = true;
+                    cell.isRevealed = true;
 
-                    Vector3 centerCellPositiona2 = new Vector3(cell.position.x + 0.5f, cell.position.y + 0.5f, cell.position.z);
+                    Vector3 centerCellPositiona2 = new Vector3(cell.position.x + HALF_CELL_WIDTH, 
+                                                               cell.position.y + HALF_CELL_WIDTH, 
+                                                               cell.position.z);
                     GameObject b = Instantiate(UIMineExplodePrefab, centerCellPositiona2, Quaternion.identity);
                     Destroy(b, 1.5f);
                 }
@@ -407,21 +413,25 @@ public class Game : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Cell cell = grid[x, y];
-                if (cell.revealed && cell.type != Cell.Type.Block &&  cell.type != Cell.Type.Mine)
+                if (cell.isRevealed 
+                    && cell.type != Cell.Type.Block 
+                    &&  cell.type != Cell.Type.Mine)
                 {
                     totalarea++;
                     sumarea++;                 
                 }
-                if (cell.revealed == false && cell.type != Cell.Type.Block && cell.type != Cell.Type.Mine)
+                if (cell.isRevealed == false 
+                    && cell.type != Cell.Type.Block 
+                    && cell.type != Cell.Type.Mine)
                     sumarea++;
             }
         }
 
         if ((totalarea / sumarea * 100) >= 100)
-            textcomplete.text = (totalarea / (totalarea + 2) * 100).ToString("F2") + "%";
+            textComplete.text = (totalarea / (totalarea + 2) * 100).ToString("F2") + "%";
         else
-        textcomplete.text = (totalarea / sumarea * 100).ToString("F2") + "%";
-        gameoverscreen.SetActive(true);
+        textComplete.text = (totalarea / sumarea * 100).ToString("F2") + "%";
+        gameOverScreen.SetActive(true);
         _userDatas.heart--;
         SaveData();
         Lives.Instance.LoseHeart();
@@ -436,7 +446,7 @@ public class Game : MonoBehaviour
                 Cell cell = grid[x, y];
 
                 // All non-mine cells must be revealed to have won
-                if (cell.type != Cell.Type.Mine && !cell.revealed) {
+                if (cell.type != Cell.Type.Mine && !cell.isRevealed) {
                     return; // no win
                 }
             }
@@ -459,20 +469,29 @@ public class Game : MonoBehaviour
 
                 if (cell.type == Cell.Type.Mine)
                 {
-                    cell.flagged = true;
+                    cell.isFlagged = true;
                 }
             }
         }
 
-        gameover = true;
+        gameOver = true;
         AudioManager.Instance.WinSound();
-        gamewinscreen.SetActive(true);
+        gameWinScreen.SetActive(true);
     }
     private bool TryGetCellAtMousePosition(out Cell cell)
     {
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int cellPosition = board.tilemap.WorldToCell(worldPosition);
-            return grid.TryGetCell(cellPosition.x, cellPosition.y, out cell); 
+        if (Input.mousePosition.x < 0 ||
+            Input.mousePosition.y < 0 ||
+            Input.mousePosition.x > Screen.width ||
+            Input.mousePosition.y > Screen.height)
+        {
+            cell = null;
+            return false;
+        }
+
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int cellPosition = board.tileMap.WorldToCell(worldPosition);
+        return grid.TryGetCell(cellPosition.x, cellPosition.y, out cell); 
     }
 
 
@@ -481,9 +500,9 @@ public class Game : MonoBehaviour
     {
         int bonusgold = 0, bonusdiamond = 0;
         int dice = Random.Range(1, probality);
-        if (dice <= _userDatas.probalitygold)
+        if (dice <= _userDatas.probalityGold)
             bonusgold = Random.Range(0, 5);
-        if (dice <= _userDatas.probalitydiamond)
+        if (dice <= _userDatas.probalityDiamond)
             bonusdiamond = Random.Range(0, 2);
 
         for(int i = 0; i < bonusgold; i++)
@@ -543,29 +562,29 @@ public class Game : MonoBehaviour
 
     public void InstantiateAndMove(GameObject prefab, Vector3 position)
     {
-        Vector3 centerCellPosition = new Vector3(position.x + 0.5f, position.y + 0.5f, position.z);
+        Vector3 centerCellPosition = new Vector3(position.x + HALF_CELL_WIDTH, position.y + HALF_CELL_WIDTH, position.z);
         GameObject obj = Instantiate(prefab, centerCellPosition, Quaternion.identity);
         StartCoroutine(MoveAndHandleObject(obj));
     }
 
     private void Sweep() 
     {
-        if (sweepmode == -1)
+        if (sweepMode == -1)
         {
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
                     Cell cell = grid[x, y];
-                    if (cell.type == Cell.Type.Number && cell.revealed == true)
+                    if (cell.type == Cell.Type.Number && cell.isRevealed == true)
                     {
                         cell.type = Cell.Type.NumEmpty;
-                        cell.numempty = true;
+                        cell.isNumberEmpty = true;
                     }
                 }
             }
         }
-        else if (sweepmode == 1)
+        else if (sweepMode == 1)
         {
             for (int x = 0; x < width; x++)
             {
@@ -575,7 +594,7 @@ public class Game : MonoBehaviour
                     if (cell.type == Cell.Type.NumEmpty)
                     {
                         cell.type = Cell.Type.Number;
-                        cell.numempty = false;
+                        cell.isNumberEmpty = false;
                     }
                 }
             }
@@ -594,7 +613,7 @@ public class Game : MonoBehaviour
 
     }
 
-    public void Backtomenu()
+    public void BackToMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }

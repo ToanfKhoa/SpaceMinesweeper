@@ -7,12 +7,12 @@ public class UserDatas
     public int level;
     public int gold;
     public int diamond;
-    public int maxheart;
+    public int maxHeart;
     public int heart;
-    public int timeheart;
-    public float timedig;
-    public int probalitygold;
-    public int probalitydiamond;
+    public int timeHeart;
+    public float timeDig;
+    public int probalityGold;
+    public int probalityDiamond;
 
     public bool skill1;
     public bool skill2;
@@ -27,19 +27,19 @@ public class UserDatas
 
     public void Init()
     {
-        level = 5;
-        gold = 9999;
-        diamond = 9999;
-        maxheart = 3;
+        level = 1;
+        gold = 0;
+        diamond = 0;
+        maxHeart = 3;
         heart = 3;
-        timedig = 1.5f;
-        probalitygold = 15;
-        probalitydiamond = 4;
-        skill1 = true;
+        timeDig = 1.5f;
+        probalityGold = 15;
+        probalityDiamond = 4;
+        skill1 = false;
         skill2 = false;
-        skill3 = true;
+        skill3 = false;
         skill4 = false;
-        skill5 = true;
+        skill5 = false;
         skill6 = false;
     }
 }

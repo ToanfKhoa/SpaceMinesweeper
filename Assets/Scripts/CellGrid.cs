@@ -40,7 +40,7 @@ public class CellGrid
 
            
                 
-            while (cell.type == Cell.Type.Mine || IsAdjacent(startingCell, cell) || cell.block)
+            while (cell.type == Cell.Type.Mine || IsAdjacent(startingCell, cell) || cell.isBlock)
             {
 
                 x++;

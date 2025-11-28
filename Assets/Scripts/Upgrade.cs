@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class Upgrade : MonoBehaviour
 {
-    public TextMeshProUGUI textgold;
-    public TextMeshProUGUI textdiamond;
-    public TextMeshProUGUI textinfor;
-    private int whattodo = 0;
-    public int costgold = 0;
-    public int costdiamond = 0;
+    public TextMeshProUGUI textGold;
+    public TextMeshProUGUI textDiamond;
+    public TextMeshProUGUI textInfor;
+    private int whatToDo = 0;
+    public int costGold = 0;
+    public int costDiamond = 0;
     public Button dig2;
     public Button heart2;
     public Button ore2;
@@ -22,14 +22,14 @@ public class Upgrade : MonoBehaviour
     public void ConfirmUpgrade()
     {
         
-        AdjustCost(whattodo);
-        if (Game.Instance._userDatas.gold >= costgold && Game.Instance._userDatas.diamond >= costdiamond)
+        AdjustCost(whatToDo);
+        if (Game.Instance._userDatas.gold >= costGold && Game.Instance._userDatas.diamond >= costDiamond)
         {
             AudioManager.Instance.WinSound();
-            DoUpgrade(whattodo);
-            Game.Instance._userDatas.gold -= costgold;
-            Game.Instance._userDatas.diamond -= costdiamond;            
-            whattodo = 0;
+            DoUpgrade(whatToDo);
+            Game.Instance._userDatas.gold -= costGold;
+            Game.Instance._userDatas.diamond -= costDiamond;            
+            whatToDo = 0;
             Game.Instance.SaveData();
         }     
     }    
@@ -37,99 +37,99 @@ public class Upgrade : MonoBehaviour
 
     public void AdjustCost(int i)
     {
-        if(whattodo == 0)
+        if(whatToDo == 0)
         {
-            costgold = 0;
-            costdiamond = 0;
+            costGold = 0;
+            costDiamond = 0;
         }    
-        if (whattodo == 1)
+        if (whatToDo == 1)
         {
-            costgold = 100;
-            costdiamond = 0;
+            costGold = 100;
+            costDiamond = 0;
         }
-        if (whattodo == 2)
+        if (whatToDo == 2)
         {
-            costgold = 200;
-            costdiamond = 5;
+            costGold = 200;
+            costDiamond = 5;
         }
-        if (whattodo == 3)
+        if (whatToDo == 3)
         {
-            costgold = 500;
-            costdiamond = 10;
+            costGold = 500;
+            costDiamond = 10;
         }
-        if (whattodo == 4)
+        if (whatToDo == 4)
         {
-            costgold = 1000;
-            costdiamond = 20;
+            costGold = 1000;
+            costDiamond = 20;
         }
-        if (whattodo == 5)
+        if (whatToDo == 5)
         {
-            costgold = 500;
-            costdiamond = 10;
+            costGold = 500;
+            costDiamond = 10;
         }
-        if (whattodo == 6)
+        if (whatToDo == 6)
         {
-            costgold = 1000;
-            costdiamond = 20;
+            costGold = 1000;
+            costDiamond = 20;
         }
     }    
 
     public void DoUpgrade(int i)
     {   
-        if(whattodo == 1)
+        if(whatToDo == 1)
         {
-            costgold = 100;
-            costdiamond = 0;
-            Game.Instance._userDatas.timedig -= 0.5f;
+            costGold = 100;
+            costDiamond = 0;
+            Game.Instance._userDatas.timeDig -= 0.5f;
             dig2.interactable = true;
             dig1.interactable = false;
             Game.Instance._userDatas.skill1 = false;
             Game.Instance._userDatas.skill2 = true;
         }
-        if (whattodo == 2)
+        if (whatToDo == 2)
         {
-            costgold = 200;
-            costdiamond = 5;
-            Game.Instance._userDatas.timedig -= 0.5f;
+            costGold = 200;
+            costDiamond = 5;
+            Game.Instance._userDatas.timeDig -= 0.5f;
             dig2.interactable = false;
             Game.Instance._userDatas.skill2 = false;
         }
-        if (whattodo == 3)
+        if (whatToDo == 3)
         {
-            costgold = 500;
-            costdiamond = 10;
-            Game.Instance._userDatas.maxheart += 1;
+            costGold = 500;
+            costDiamond = 10;
+            Game.Instance._userDatas.maxHeart += 1;
             Game.Instance._userDatas.heart += 1;
             heart2.interactable = true;
             heart1.interactable = false;
             Game.Instance._userDatas.skill3 = false;
             Game.Instance._userDatas.skill4 = true;
         }
-        if (whattodo == 4)
+        if (whatToDo == 4)
         {
-            costgold = 1000;
-            costdiamond = 20;
-            Game.Instance._userDatas.maxheart += 1;
+            costGold = 1000;
+            costDiamond = 20;
+            Game.Instance._userDatas.maxHeart += 1;
             Game.Instance._userDatas.heart += 1;
             heart2.interactable = false;
             Game.Instance._userDatas.skill4 = false;
         }
-        if (whattodo == 5)
+        if (whatToDo == 5)
         {
-            costgold = 500;
-            costdiamond = 10;
-            Game.Instance._userDatas.probalitygold += 10;
+            costGold = 500;
+            costDiamond = 10;
+            Game.Instance._userDatas.probalityGold += 10;
             ore2.interactable = true;
             ore1.interactable = false;
             Game.Instance._userDatas.skill5 = false;
             Game.Instance._userDatas.skill6 = true;
         }
-        if (whattodo == 6)
+        if (whatToDo == 6)
         {
-            costgold = 1000;
-            costdiamond = 20;
-            Game.Instance._userDatas.probalitygold += 5;
-            Game.Instance._userDatas.probalitydiamond += 3;
+            costGold = 1000;
+            costDiamond = 20;
+            Game.Instance._userDatas.probalityGold += 5;
+            Game.Instance._userDatas.probalityDiamond += 3;
             ore2.interactable = false;
             Game.Instance._userDatas.skill6 = false;
         }
@@ -138,41 +138,41 @@ public class Upgrade : MonoBehaviour
 
     public void Choose(int x)
     {
-        whattodo = x;
+        whatToDo = x;
     }
 
     public void AdjustInfor(int z)
     {
         
-            if (textinfor != null)
+            if (textInfor != null)
         {
             if(z == 0)
             {
-                textinfor.text = "Upgrade successful";
+                textInfor.text = "Upgrade successful";
             }    
             if (z == 1)
             {
-                textinfor.text = "Digging time: 2s -> 1.5s";
+                textInfor.text = "Digging time: 2s -> 1.5s";
             }
             if (z == 2)
             {
-                textinfor.text = "Digging time: 1.5s -> 1s";
+                textInfor.text = "Digging time: 1.5s -> 1s";
             }
             if (z == 3)
             {
-                textinfor.text = "Max hearts: 3 -> 4";
+                textInfor.text = "Max hearts: 3 -> 4";
             }
             if (z == 4)
             {
-                textinfor.text = "Max hearts: 4 -> 5";
+                textInfor.text = "Max hearts: 4 -> 5";
             }
             if (z == 5)
             {
-                textinfor.text = "Chance to collect gold +10%";
+                textInfor.text = "Chance to collect gold +10%";
             }
             if (z == 6)
             {
-                textinfor.text = "Chance to collect gold +5%, diamond +3%";
+                textInfor.text = "Chance to collect gold +5%, diamond +3%";
             }
         }
            
@@ -180,8 +180,8 @@ public class Upgrade : MonoBehaviour
 
     void Start()
     {
-        this.textgold.text = Game.Instance._userDatas.gold.ToString();
-        this.textdiamond.text = Game.Instance._userDatas.diamond.ToString();
+        this.textGold.text = Game.Instance._userDatas.gold.ToString();
+        this.textDiamond.text = Game.Instance._userDatas.diamond.ToString();
         if(dig1 != null)
         { 
             dig1.interactable = Game.Instance._userDatas.skill1;
@@ -195,9 +195,9 @@ public class Upgrade : MonoBehaviour
     
     void Update()
     {
-        textgold.text = Game.Instance._userDatas.gold.ToString();
-        textdiamond.text = Game.Instance._userDatas.diamond.ToString();
-        AdjustInfor(whattodo);
+        textGold.text = Game.Instance._userDatas.gold.ToString();
+        textDiamond.text = Game.Instance._userDatas.diamond.ToString();
+        AdjustInfor(whatToDo);
     }
 
 }

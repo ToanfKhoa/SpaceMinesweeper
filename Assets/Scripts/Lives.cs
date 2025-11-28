@@ -40,7 +40,7 @@ public class Lives : MonoBehaviour
 
     public void LoseHeart()
     {
-        if (Game.Instance._userDatas.heart + 1 == Game.Instance._userDatas.maxheart)
+        if (Game.Instance._userDatas.heart + 1 == Game.Instance._userDatas.maxHeart)
         {
             nextHeartTime = AddDuration(DateTime.Now, restoreDuration);
         }
@@ -52,14 +52,14 @@ public class Lives : MonoBehaviour
         UpdateTimer();
         UpdateHeart();
         restoring = true;
-        while(Game.Instance._userDatas.heart < Game.Instance._userDatas.maxheart)
+        while(Game.Instance._userDatas.heart < Game.Instance._userDatas.maxHeart)
         {
             DateTime currentTime = DateTime.Now;
             DateTime counter = nextHeartTime;
             bool isAdding = false;
             while(currentTime > counter)
             {
-                if (Game.Instance._userDatas.heart < Game.Instance._userDatas.maxheart)
+                if (Game.Instance._userDatas.heart < Game.Instance._userDatas.maxHeart)
                 {
                     isAdding = true;
                     Game.Instance._userDatas.heart++;                   
@@ -92,7 +92,7 @@ public class Lives : MonoBehaviour
 
     private void UpdateTimer()
     {
-        if (Game.Instance._userDatas.heart >= Game.Instance._userDatas.maxheart)
+        if (Game.Instance._userDatas.heart >= Game.Instance._userDatas.maxHeart)
         {
             textTimer.text = "Full";
             return;

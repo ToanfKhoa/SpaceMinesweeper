@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class Board : MonoBehaviour
 {
 
-    public Tilemap tilemap { get; private set; }
+    public Tilemap tileMap { get; private set; }
     public Tile tileUnknown;
     public Tile tileEmpty;
     public Tile tileNumEmpty;
@@ -26,7 +26,7 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
-        tilemap = GetComponent<Tilemap>();
+        tileMap = GetComponent<Tilemap>();
     }
 
     public void Draw(CellGrid grid)
@@ -39,8 +39,8 @@ public class Board : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Cell cell = grid[x, y];
-                if(!cell.block)
-                tilemap.SetTile(cell.position, GetTile(cell));
+                if(!cell.isBlock)
+                tileMap.SetTile(cell.position, GetTile(cell));
             }
         }
     }
@@ -50,25 +50,25 @@ public class Board : MonoBehaviour
         int width = grid.Width;
         int height = grid.Height;
 
-        //Tao rock
+        //Spawn rocks
         for (int i = 0; i < rockCount; i++)
         {
             int x = Random.Range(0, width);
             int y = Random.Range(0, height);
             Cell cell = grid[x, y];
-            tilemap.SetTile(cell.position, tileRock);
-            cell.block = true;
-            cell.revealed = true;
+            tileMap.SetTile(cell.position, tileRock);
+            cell.isBlock = true;
+            cell.isRevealed = true;
             cell.type = Cell.Type.Block;
         }
 
-        //Tao hinh dang ngau nhien cho map bang cach xoa bot tile
-        int[] edgesx = { 0, width - 1 };
-        foreach (int x in edgesx)             // Xử lý cột đầu và cuối
+        //Generate random shape of map by remove some tiles
+        int[] edgesX = { 0, width - 1 };
+        foreach (int x in edgesX)             // Solve first and last column
         {
             for (int y = 0; y < height; y++)
             {
-                if (y == 1 || y == 2 || y == height - 2 || x == height - 3) //Khong xoa vi tri o gan goc
+                if (y == 1 || y == 2 || y == height - 2 || x == height - 3) //Not remove tile near corner
                 { continue; }
                 Cell cell = grid[x, y];
                 if (Random.value > 0.5f) // Xác suất xóa thêm ngẫu nhiên
@@ -81,7 +81,7 @@ public class Board : MonoBehaviour
                         ClearTile(cell2);
 
                         Cell cell3 = grid[(x == 0) ? (x + 2) : (x - 2), y];
-                        if (!cell.block && Random.value > 0.8f)          //Xac suat xoa sau vao them nua
+                        if (!cell.isBlock && Random.value > 0.8f)          //Xac suat xoa sau vao them nua
                         {                   
                             ClearTile(cell3);
                         }
@@ -89,8 +89,8 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        int[] edgesy = { 0, height - 1 };
-        foreach (int y in edgesy)  // Xử lý hàng đầu và cuối
+        int[] edgesY = { 0, height - 1 };
+        foreach (int y in edgesY)  // Xử lý hàng đầu và cuối
         {
             for (int x = 0; x < width; x++)
             {
@@ -120,26 +120,26 @@ public class Board : MonoBehaviour
     
     private void ClearTile(Cell cell)
     {
-        tilemap.SetTile(cell.position, null);  // Xoa tile
+        tileMap.SetTile(cell.position, null);  // Xoa tile
         cell.type = Cell.Type.Empty;          // Xem như tile rỗng
-        cell.revealed = true;                // Không thể đào
-        cell.block = true;                  // Không thể spawn mine
+        cell.isRevealed = true;                // Không thể đào
+        cell.isBlock = true;                  // Không thể spawn mine
     }
 
     private Tile GetTile(Cell cell)
 
     {
-        if (cell.block)
+        if (cell.isBlock)
         {
             return tileRock;
         }    
-        else if (cell.numempty)
+        else if (cell.isNumberEmpty)
         {
             return tileEmpty;
         }
-        else if (cell.revealed) {
+        else if (cell.isRevealed) {
             return GetRevealedTile(cell);
-        } else if (cell.flagged) {
+        } else if (cell.isFlagged) {
             return tileFlag;
         } 
         else {
@@ -152,7 +152,7 @@ public class Board : MonoBehaviour
         switch (cell.type)
         {
             case Cell.Type.Empty: return tileEmpty;
-            case Cell.Type.Mine: return cell.exploded ? tileExploded : tileMine;
+            case Cell.Type.Mine: return cell.isExploded ? tileExploded : tileMine;
             case Cell.Type.Number: return GetNumberTile(cell);
             default: return null;
         }

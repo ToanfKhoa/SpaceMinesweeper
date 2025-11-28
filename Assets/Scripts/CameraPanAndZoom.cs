@@ -23,14 +23,14 @@ public class CameraPanAndZoom : MonoBehaviour
 
     void Update()
     {
-        if(Game.Instance.Bagscreen.activeSelf == false)
+        if(Game.Instance.bagScreen.activeSelf == false)
         {
-            pan();
-            zoom(Input.GetAxis("Mouse ScrollWheel"));
+            Pan();
+            Zoom(Input.GetAxis("Mouse ScrollWheel"));
         }        
     }
 
-    void pan()
+    void Pan()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -49,7 +49,7 @@ public class CameraPanAndZoom : MonoBehaviour
 
             float difference = currentMagnitude - prevMagnitude;
 
-            zoom(difference * 0.01f);
+            Zoom(difference * 0.01f);
         }
         else if (Input.GetMouseButton(0))
         {
@@ -59,13 +59,14 @@ public class CameraPanAndZoom : MonoBehaviour
             float distance = Vector3.Distance(Camera.main.transform.position, Game.Instance.initCameraPosition);
             if (distance > moveMax)
             {
-                //Dua camera ve vi tri hop le
+                //Put camera to the right position
                 Vector3 directionBack = (Camera.main.transform.position - Game.Instance.initCameraPosition).normalized;
                 Camera.main.transform.position = Game.Instance.initCameraPosition + directionBack * moveMax;
             }
         }
     }    
-    void zoom(float increment)
+
+    void Zoom(float increment)
     {
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, zoomOutMin, zoomOutMax);
     }

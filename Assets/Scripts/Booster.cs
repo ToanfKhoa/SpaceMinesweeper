@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using TMPro;
 
@@ -38,7 +37,9 @@ public class Booster : MonoBehaviour
             {
                 Cell cell = Game.Instance.grid.cells[x, y];
 
-                if (cell.type != Cell.Type.Mine && cell.type != Cell.Type.Block && cell.revealed == false)
+                if (cell.type != Cell.Type.Mine 
+                    && cell.type != Cell.Type.Block 
+                    && cell.isRevealed == false)
                 {
                     listCanDigCell.Add(cell);
                 }
@@ -47,18 +48,26 @@ public class Booster : MonoBehaviour
         if(listCanDigCell.Count == 0) return;
 
         Cell randomCell = listCanDigCell[Random.Range(0, listCanDigCell.Count)];
-        if (!Game.Instance.generated)
+        if (!Game.Instance.isGenerated)
         {
             Game.Instance.grid.GenerateMines(randomCell, Game.Instance.mineCount);
             Game.Instance.grid.GenerateNumbers();
-            Game.Instance.generated = true;
+            Game.Instance.isGenerated = true;
         }
         GameObject laserEffect = Instantiate(laserPrefab, randomCell.position + new Vector3(0.5f, 0.5f), Quaternion.identity);
 
-        //Kiem tra neu hieu ung kich hoat ben ngoai camera thi dich chuyen toi do
+        //Check if the effect is out of the camera and teleport to that position
         Vector3 viewportPosition = Camera.main.WorldToViewportPoint(laserEffect.transform.position);
-        if(viewportPosition.x <= 0f || viewportPosition.x >= 1f || viewportPosition.y <= 0f || viewportPosition.y >= 0.9f)
-            Camera.main.transform.position = new Vector3(laserEffect.transform.position.x, laserEffect.transform.position.y, Camera.main.transform.position.z);
+        if (viewportPosition.x <= 0f
+            || viewportPosition.x >= 1f
+            || viewportPosition.y <= 0f
+            || viewportPosition.y >= 0.9f
+        )
+        {
+            Camera.main.transform.position = new Vector3(laserEffect.transform.position.x,
+                                                        laserEffect.transform.position.y,
+                                                        Camera.main.transform.position.z);
+        }
 
         Destroy(laserEffect, 0.5f);
         Game.Instance.Reveal(randomCell);
