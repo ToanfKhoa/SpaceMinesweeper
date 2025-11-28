@@ -1417,7 +1417,7 @@ GameObject:
   - component: {fileID: 243049458}
   - component: {fileID: 243049457}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Complete tag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4513,11 +4513,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e25ee74c555a4147ad7000f31f84268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textgold: {fileID: 990177581}
-  textdiamond: {fileID: 1247511255}
-  textinfor: {fileID: 0}
-  costgold: 0
-  costdiamond: 0
+  textGold: {fileID: 990177581}
+  textDiamond: {fileID: 1247511255}
+  textInfor: {fileID: 1458030366}
+  costGold: 0
+  costDiamond: 0
   dig2: {fileID: 0}
   heart2: {fileID: 0}
   ore2: {fileID: 0}
@@ -4902,11 +4902,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e25ee74c555a4147ad7000f31f84268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textgold: {fileID: 990177581}
-  textdiamond: {fileID: 1247511255}
-  textinfor: {fileID: 1458030366}
-  costgold: 0
-  costdiamond: 0
+  textGold: {fileID: 0}
+  textDiamond: {fileID: 0}
+  textInfor: {fileID: 0}
+  costGold: 0
+  costDiamond: 0
   dig2: {fileID: 573986260}
   heart2: {fileID: 2024021249}
   ore2: {fileID: 1360061110}
@@ -7551,7 +7551,7 @@ GameObject:
   - component: {fileID: 1317935279}
   - component: {fileID: 1317935278}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text Complete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9810,25 +9810,25 @@ MonoBehaviour:
   mineCount: 18
   rockCount: 3
   board: {fileID: 0}
-  generated: 0
-  textgold: {fileID: 340427724}
-  textdiamond: {fileID: 301780120}
-  textlevel: {fileID: 964861172}
-  textcomplete: {fileID: 2139690812}
+  isGenerated: 0
+  textGold: {fileID: 340427724}
+  textDiamond: {fileID: 301780120}
+  textLevel: {fileID: 964861172}
+  textComplete: {fileID: 1317935278}
   goldPrefab: {fileID: 6127283333846756172, guid: c63566adec60af64aa7c9b258cdf8fbf, type: 3}
   diamondPrefab: {fileID: 6596698295473145215, guid: 1024f3a993e5edb43ae94e5d889a6c2c, type: 3}
   bagIcon: {fileID: 168666674}
   initCameraPosition: {x: 0, y: 0, z: 0}
-  sweepscreen: {fileID: 275739916}
+  sweepScreen: {fileID: 275739916}
   isImageVisible: 0
-  sweepmode: -1
-  gameoverscreen: {fileID: 1646453957}
-  gamewinscreen: {fileID: 565959747}
+  sweepMode: -1
+  gameOverScreen: {fileID: 1646453957}
+  gameWinScreen: {fileID: 565959747}
   UIDirtExplodePrefab: {fileID: 2009725724459819310, guid: e3f727f927b2f9a49b9b4a9aea061af6, type: 3}
   UIMineExplodePrefab: {fileID: 1101273082892885667, guid: 9221cb63a4502804aaee7c9c8bcf5e97, type: 3}
   UIDirtDigPrefab: {fileID: 8380620538283553660, guid: 19e36ed2d257ee74bae0c325e5f8d5b3, type: 3}
-  Bagscreen: {fileID: 1272934114}
-  OutOfHeartScreen: {fileID: 1227732646}
+  bagScreen: {fileID: 1272934114}
+  outOfHeartScreen: {fileID: 1227732646}
   bugPrefab: {fileID: 2269101976617681043, guid: 247ff9107f579bd4cb5e477359c1d70b, type: 3}
 --- !u!1 &1704898998
 GameObject:
